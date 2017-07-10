@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-feb-2017 21:21:20 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Alumnos" table="Alumnos" catalog="biblioteca">
+        <id name="registro" type="java.lang.Integer">
+            <column name="registro" />
+            <generator class="identity" />
+        </id>
+        <property name="dni" type="string">
+            <column name="dni" length="14" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="26" not-null="true" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="apellido1" length="21" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="apellido2" length="21" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

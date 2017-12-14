@@ -33,15 +33,23 @@ public class AlumnosConsultas {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			trns = session.beginTransaction();
-			Alumnos alumno = (Alumnos) session.load(Alumnos.class, new Integer(registro));
+			Alumnos alumno = (Alumnos) session.get(Alumnos.class, new Integer(registro));
 			session.delete(alumno);
 			session.getTransaction().commit();
+			System.out.println("Borrado");
+		} catch (NullPointerException nullExce){
+			System.out.println("Registro no encontrado");
+		} catch (IllegalArgumentException illegalExc){
+			System.out.println("Registro no encontrado");
 		} catch (RuntimeException e) {
+		
 			if (trns != null) {
 				trns.rollback();
 			}
 			e.printStackTrace();
-		} finally {
+		}
+		
+		finally {
 			session.flush();
 			session.close();
 		}
@@ -90,8 +98,10 @@ public class AlumnosConsultas {
 			Query query = session.createQuery(queryString);
 			query.setInteger("registro", registro);
 			alumno = (Alumnos) query.uniqueResult();
+		} catch (NullPointerException nullExce){
+			System.out.println("Registro no encontrado");
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			System.out.println("Registro no encontrado");
 		} finally {
 			session.flush();
 			session.close();

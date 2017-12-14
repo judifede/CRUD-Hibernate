@@ -31,21 +31,30 @@ public class WindowView extends JFrame {
     JButton botonDelete = new JButton();
     JButton botonSelectAll = new JButton();
     JButton botonSelectByRegistro = new JButton();
+    
+    JTextField[] cajas = {cajaRegistro, cajaDni, cajaNombre, 
+    		cajaApellido1, cajaApellido2};
+    JButton[] botones = {botonInsert, botonUpdate, botonDelete,
+    		botonSelectAll, botonSelectByRegistro};
 
-    public WindowView(JFrame WindowView){
+    
+    
+
+	public WindowView(Events events) {
         configuracionVentana();
         configuracionCampos();
         configuracionBotones();
-    }
-    public WindowView(Events Events) {
-        configuracionVentana();
-        configuracionCampos();
-        configuracionBotones();
-        botonInsert.addActionListener(Events);
-        botonUpdate.addActionListener(Events);
-        botonDelete.addActionListener(Events);
-        botonSelectAll.addActionListener(Events);
-        botonSelectByRegistro.addActionListener(Events);
+        botonInsert.addActionListener(events);
+        botonUpdate.addActionListener(events);
+        botonDelete.addActionListener(events);
+        botonSelectAll.addActionListener(events);
+        botonSelectByRegistro.addActionListener(events);
+        cajaRegistro.getDocument().addDocumentListener(events);
+        cajaDni.getDocument().addDocumentListener(events);
+        cajaNombre.getDocument().addDocumentListener(events);
+        cajaApellido1.getDocument().addDocumentListener(events);
+        cajaApellido2.getDocument().addDocumentListener(events);
+
     }
 
     private void configuracionVentana() {
@@ -93,14 +102,17 @@ public class WindowView extends JFrame {
     	botonInsert.setText("Añadir (Con todo)");
     	botonInsert.setBounds(40, 200, 300, 30);
     	botonInsert.setActionCommand("Insert");
+    	botonInsert.setEnabled(false);
 
         botonUpdate.setText("Modificar (Con todo)");
         botonUpdate.setBounds(40, 235, 300, 30);
         botonUpdate.setActionCommand("Update");
+        botonUpdate.setEnabled(false);
     	
         botonDelete.setText("Borrar (Con Registro)");
         botonDelete.setBounds(40, 270, 300, 30);
         botonDelete.setActionCommand("Delete");
+        botonDelete.setEnabled(false);
         
         botonSelectAll.setText("Seleccionar todos (Por consola)");
         botonSelectAll.setBounds(40, 305, 300, 30);
@@ -109,6 +121,7 @@ public class WindowView extends JFrame {
         botonSelectByRegistro.setText("Seleccionar por registro (Con registro)");
         botonSelectByRegistro.setBounds(40, 340, 300, 30);
         botonSelectByRegistro.setActionCommand("SelectByRegistro");
+        botonSelectByRegistro.setEnabled(false);
 
         this.add(botonUpdate);
         this.add(botonInsert);
@@ -117,7 +130,7 @@ public class WindowView extends JFrame {
         this.add(botonSelectByRegistro);
         
     }
-
+    
     
 	public JTextField getCajaRegistro() {
         return cajaRegistro;
@@ -138,6 +151,20 @@ public class WindowView extends JFrame {
     public JTextField getCajaApellido2() {
         return cajaApellido2;
     }
-	
+    public JTextField[] getCajas() {
+		return cajas;
+	}
+
+	public void setCajas(JTextField[] cajas) {
+		this.cajas = cajas;
+	}
+
+	public JButton[] getBotones() {
+		return botones;
+	}
+
+	public void setBotones(JButton[] botones) {
+		this.botones = botones;
+	}
 
 }
